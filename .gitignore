@@ -1,0 +1,6 @@
+data/
+PROC/
+*.csv
+*.zip
+*.npz
+.ipynb_checkpoints/
