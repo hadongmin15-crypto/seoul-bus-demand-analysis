@@ -3,7 +3,7 @@
 사용법 (노트북 첫 셀):
     import sys
     from pathlib import Path
-    ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / "CLAUDE.md").exists())
+    ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / "data").is_dir())
     sys.path.insert(0, str(ROOT / "src"))
     from paths import RAW, EXT, PROC, REPORTS
 """
@@ -11,12 +11,12 @@ from pathlib import Path
 
 
 def find_root(start: Path = None) -> Path:
-    """CLAUDE.md가 있는 폴더를 프로젝트 ROOT로 본다."""
+    """data 폴더가 있는 폴더를 프로젝트 ROOT로 본다."""
     start = Path(start or Path.cwd()).resolve()
     for p in [start, *start.parents]:
-        if (p / "CLAUDE.md").exists():
+        if (p / "data").is_dir():
             return p
-    raise FileNotFoundError("CLAUDE.md를 못 찾음 — 프로젝트 안에서 실행해야 한다")
+    raise FileNotFoundError("data 폴더를 못 찾음 — 프로젝트 안에서 실행해야 한다")
 
 
 ROOT = find_root(Path(__file__).parent)
